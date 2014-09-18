@@ -17,5 +17,6 @@ public:
 	};
 
 private:
-	int estado;
+	Estado estado; ///ACT2: Esto esta MAL
+	///Corregido, maestro.
 };
