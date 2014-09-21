@@ -17,6 +17,5 @@ public:
 	};
 
 private:
-	Estado estado; ///ACT2: Esto esta MAL
-	///Corregido, maestro.
+	Estado estado; 
 };
