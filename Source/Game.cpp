@@ -3,7 +3,7 @@
 #include "Game.h"
 
 CGame::CGame(){
-	Estado estado;////ACT2: Mal, si te fijas en "Game.h" ya tienes esta variable dada de alta, ahora debes de darle el valor inicial, indica cual es tu primer estado.
+	int estado = 0;////ACT2: Mal, si te fijas en "Game.h" ya tienes esta variable dada de alta, ahora debes de darle el valor inicial, indica cual es tu primer estado.
 }
 
 // Con esta función eliminaremos todos los elementos en pantalla
