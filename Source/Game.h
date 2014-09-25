@@ -17,5 +17,7 @@ public:
 	};
 
 private:
+	void Iniciando();
+	SDL_Surface *screen;
 	Estado estado; 
 };
