@@ -5,8 +5,13 @@
 #include <SDL.h>
 
 CGame::CGame(){
+<<<<<<< HEAD
 	estado=ESTADO_INICIANDO; ///ACT2: Mal, debes de usar tu variable estado que creaste en el Game.h y alguna de las banderas del enum, que indicaran el estado inicial del juego.
 	
+=======
+	Estado::ESTADO_INICIANDO; 
+	atexit(SDL_Quit);
+>>>>>>> 04a24772a425749c83f6b46d1b6519a18ae5ede7
 }
 
 // Con esta función eliminaremos todos los elementos en pantalla
@@ -62,8 +67,13 @@ bool CGame::Start()
 			salirJuego = true;
 			Finalize();
 			break;
+<<<<<<< HEAD
 		}
 	/*if (SDL_Init( SDL_INIT_VIDEO )){
+=======
+			///////////ACT3: Mal, esta seccion debe estar en un metodo llamado inicio///////
+	if (SDL_Init( SDL_INIT_VIDEO )){
+>>>>>>> 04a24772a425749c83f6b46d1b6519a18ae5ede7
 
 printf("Error %s ", SDL_GetError());
 
@@ -82,6 +92,8 @@ exit(EXIT_FAILURE);
 }
 */
 SDL_WM_SetCaption( "Mi primer Juego", NULL );
+///////ACT3: Mal, aqui termina el codigo mal.
+
 //Este codigo estara provicionalmente aqui.
 SDL_Flip(screen);
 }
