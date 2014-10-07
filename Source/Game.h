@@ -17,7 +17,7 @@ public:
 	};
 
 private:
-	void Iniciando();
+	void Iniciando();//ACT3: Mal, este es el metodo que debes de crear.
 	SDL_Surface *screen;
 	Estado estado; 
 };

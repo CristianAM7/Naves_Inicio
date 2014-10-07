@@ -33,7 +33,7 @@ bool CGame::Start()
 		case Estado::ESTADO_FINALIZANDO:
 				salirJuego = true;
 			break;
-
+			///////////ACT3: Mal, esta seccion debe estar en un metodo llamado inicio///////
 	if (SDL_Init( SDL_INIT_VIDEO )){
 
 printf("Error %s ", SDL_GetError());
@@ -53,6 +53,8 @@ exit(EXIT_FAILURE);
 }
 
 SDL_WM_SetCaption( "Mi primer Juego", NULL );
+///////ACT3: Mal, aqui termina el codigo mal.
+
 //Este codigo estara provicionalmente aqui.
 SDL_Flip(screen);
     }
