@@ -4,7 +4,7 @@
 #include <SDL.h>
 
 CGame::CGame(){
-	Estado::ESTADO_INICIANDO; ///ACT2: Mal, debes de usar tu variable estado que creaste en el Game.h y alguna de las banderas del enum, que indicaran el estado inicial del juego.
+	Estado::ESTADO_INICIANDO; 
 	atexit(SDL_Quit);
 }
 
