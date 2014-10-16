@@ -19,11 +19,11 @@ public:
 
 private:
 	void Iniciando();
-	unsigned int x;
 	Uint8 * keys;
 	SDL_Event event;
 
 	SDL_Surface * screen;
 	Nave * nave;
+	Nave * enemigo;
 	Estado estado; 
 };

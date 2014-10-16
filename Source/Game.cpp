@@ -32,7 +32,9 @@ void CGame::Iniciando(){
 		}
 		SDL_WM_SetCaption( "Mi primer Juego", NULL );
 		atexit(SDL_Quit);
-		nave = new Nave(screen,"../Data/minave.bmp");
+		nave = new Nave(screen,"../Data/minave.bmp",(WIDTH_SCREEN/2)/*-(sprite->WidthModule(0)/2)*/,(HEIGHT_SCREEN-80)/*-(sprite->HeightModule(0))*/);
+		enemigo = new Nave(screen,"../Data/enemigo.bmp",0,0);
+		enemigo->SetAutoMovimiento(true);
 		//delete nave;
 }
 
@@ -50,25 +52,19 @@ bool CGame::Start()
 			estado = ESTADO_MENU;
 			break;
 		case Estado::ESTADO_MENU:
+			enemigo->Actualizar();
 			printf("\n2. ESTADO_MENU");
-			/*nave->PintarModulo(0, 0, 0, 64, 64);*/
-			/*nave->PintarModulo(0,100,100);
-			nave->PintarModulo(1,0,0);*/
-			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,0,0,0));
+			//nave->PintarModulo(1,0,0);*/
+			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,250,280,280));
 			keys = SDL_GetKeyState(NULL);
 			if(keys[SDLK_RIGHT]){
 				nave->Mover(1);
 			}
 			if(keys[SDLK_LEFT]){
-				nave->Mover(1);
-			}
-			if(keys[SDLK_UP]){
-				nave->Mover(1);
-			}
-			if(keys[SDLK_DOWN]){
-				nave->Mover(1);
+				nave->Mover(-1);
 			}
 			nave->Pintar();
+			enemigo->Pintar();
 			break;
 		case Estado::ESTADO_JUGANDO:
 			printf("\n3. ESTADO_JUGANDO");
