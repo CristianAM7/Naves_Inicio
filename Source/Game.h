@@ -1,13 +1,11 @@
-#include "Sprite.h"
+#pragma once;
+#include "Nave.h"
 
 class CGame
 {
 public:
 	bool Start();
 	static CGame instanceGame;
-
-	CGame();
-	void Finalize();
 
 	enum Estado{
 		ESTADO_INICIANDO,
@@ -16,15 +14,16 @@ public:
 		ESTADO_TERMINANDO,
 		ESTADO_FINALIZANDO
 	};
+	CGame();
+	void Finalize();
 
 private:
-<<<<<<< HEAD
 	void Iniciando();
+	unsigned int x;
+	Uint8 * keys;
+	SDL_Event event;
+
 	SDL_Surface * screen;
-	Sprite * nave;
-=======
-	void Iniciando();//ACT3: Mal, este es el metodo que debes de crear.
-	SDL_Surface *screen;
->>>>>>> 04a24772a425749c83f6b46d1b6519a18ae5ede7
+	Nave * nave;
 	Estado estado; 
 };
