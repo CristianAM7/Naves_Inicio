@@ -6,8 +6,7 @@
 
 CGame::CGame(){
 	estado=ESTADO_INICIANDO;
-	
-	Estado::ESTADO_INICIANDO; 
+	//Estado::ESTADO_INICIANDO; //ACT3: Mal, esto no va.
 	atexit(SDL_Quit);
 }
 
@@ -25,17 +24,17 @@ void CGame::Iniciando(){
 	}
 
 	screen = SDL_SetVideoMode( WIDTH_SCREEN, HEIGHT_SCREEN, 24, SDL_HWSURFACE);
-		if (screen == NULL)
-		{
-			printf("Error %s ", SDL_GetError());
-			exit(EXIT_FAILURE);
-		}
-		SDL_WM_SetCaption( "Mi primer Juego", NULL );
-		atexit(SDL_Quit);
-		nave = new Nave(screen,"../Data/minave.bmp",(WIDTH_SCREEN/2)/*-(sprite->WidthModule(0)/2)*/,(HEIGHT_SCREEN-80)/*-(sprite->HeightModule(0))*/);
-		enemigo = new Nave(screen,"../Data/enemigo.bmp",0,0);
-		enemigo->SetAutoMovimiento(true);
-		//delete nave;
+	if (screen == NULL)
+	{
+		printf("Error %s ", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
+	SDL_WM_SetCaption( "Mi primer Juego", NULL );
+	atexit(SDL_Quit);
+	nave = new Nave(screen,"../Data/minave.bmp",(WIDTH_SCREEN/2)/*-(sprite->WidthModule(0)/2)*/,(HEIGHT_SCREEN-80)/*-(sprite->HeightModule(0))*/);
+	enemigo = new Nave(screen,"../Data/enemigo.bmp",0,0);
+	enemigo->SetAutoMovimiento(true);
+	//delete nave;
 }
 
 bool CGame::Start()
@@ -87,7 +86,7 @@ bool CGame::Start()
 			if(event.type == SDL_KEYDOWN) {  }
 		}
 
-//Este codigo estara provicionalmente aqui.
+		//Este codigo estara provicionalmente aqui.
 		SDL_Flip(screen);
 	}
 	return true;
