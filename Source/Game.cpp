@@ -46,15 +46,21 @@ bool CGame::Start()
 		//Maquina de estados
 		switch(estado){
 		case Estado::ESTADO_INICIANDO:
+			//system("cls");
 			printf("\n1. ESTADO_INICIANDO");
+			printf("\n2. ESTADO_MENU");
+			printf("\n3. ESTADO_JUGANDO");
+			printf("\n4. ESTADO_TERMINANDO");
+			printf("\n2. ESTADO_MENU");
+			printf("\n5. ESTADO_FINALIZANDO");
+			scanf("%d",&estado);
 			Iniciando();
 			estado = ESTADO_MENU;
-			//estado = ESTADO_JUGANDO;
-			//estado = ESTADO_TERMINANDO;
-			//estado = ESTADO_FINALIZANDO;
+			getchar();
 			break;
 		case Estado::ESTADO_MENU:
 			enemigo->Actualizar();
+			system("cls");
 			printf("\n2. ESTADO_MENU");
 			//nave->PintarModulo(1,0,0);
 			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,0,0,0));
@@ -67,15 +73,22 @@ bool CGame::Start()
 			}
 			nave->Pintar();
 			enemigo->Pintar();
+			//getchar();
 			break;
 		case Estado::ESTADO_JUGANDO:
+			system("cls");
 			printf("\n3. ESTADO_JUGANDO");
+			getchar();
 			break;
 		case Estado::ESTADO_TERMINANDO:
+			system("cls");
 			printf("\n4. ESTADO_TERMINANDO");
+			getchar();
 			break;
 		case Estado::ESTADO_FINALIZANDO:
+			system("cls");
 			printf("\n5. ESTADO_FINALIZANDO");
+			getchar();
 			salirJuego = false;
 			Finalize();
 			break;
