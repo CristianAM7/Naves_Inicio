@@ -19,6 +19,8 @@ public:
 
 private:
 	void Iniciando();
+	bool EsLimitePantalla(Nave * objeto, int bandera);
+
 	Uint8 * keys;
 	SDL_Event event;
 

@@ -6,7 +6,6 @@
 
 CGame::CGame(){
 	estado=ESTADO_INICIANDO;
-	//Estado::ESTADO_INICIANDO; //ACT3: Mal, esto no va.
 	atexit(SDL_Quit);
 }
 
@@ -47,26 +46,27 @@ bool CGame::Start()
 		switch(estado){
 		case Estado::ESTADO_INICIANDO:
 			//system("cls");
-			printf("\n1. ESTADO_INICIANDO");
+			/*printf("\n1. ESTADO_INICIANDO");
 			printf("\n2. ESTADO_MENU");
 			printf("\n3. ESTADO_JUGANDO");
 			printf("\n4. ESTADO_TERMINANDO");
 			printf("\n2. ESTADO_MENU");
 			printf("\n5. ESTADO_FINALIZANDO");
-			scanf("%d",&estado);
+			scanf("%d",&estado);*/
 			Iniciando();
 			estado = ESTADO_MENU;
-			getchar();
+			//getchar();
 			break;
 		case Estado::ESTADO_MENU:
 			enemigo->Actualizar();
-			system("cls");
-			printf("\n2. ESTADO_MENU");
+			/*system("cls");
+			printf("\n2. ESTADO_MENU");*/
 			//nave->PintarModulo(1,0,0);
 			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,0,0,0));
 			keys = SDL_GetKeyState(NULL);
 			if(keys[SDLK_RIGHT]){
-				nave->Mover(1);
+				if(!EsLimitePantalla(nave))
+					nave->Mover(1);
 			}
 			if(keys[SDLK_LEFT]){
 				nave->Mover(-1);
@@ -76,19 +76,19 @@ bool CGame::Start()
 			//getchar();
 			break;
 		case Estado::ESTADO_JUGANDO:
-			system("cls");
+			/*system("cls");
 			printf("\n3. ESTADO_JUGANDO");
-			getchar();
+			getchar();*/
 			break;
 		case Estado::ESTADO_TERMINANDO:
-			system("cls");
+			/*system("cls");
 			printf("\n4. ESTADO_TERMINANDO");
-			getchar();
+			getchar();*/
 			break;
 		case Estado::ESTADO_FINALIZANDO:
-			system("cls");
+			/*system("cls");
 			printf("\n5. ESTADO_FINALIZANDO");
-			getchar();
+			getchar();*/
 			salirJuego = false;
 			Finalize();
 			break;
@@ -103,4 +103,15 @@ bool CGame::Start()
 		SDL_Flip(screen);
 	}
 	return true;
+}
+bool CGame::EsLimitePantalla(Nave * objeto, int bandera){
+	if(objeto->ObtenerX() <= 0)
+		return true;
+	if(objeto->ObtenerY() <= 0)
+		return true;
+	if(objeto->ObtenerX() >= WIDTH_SCREEN - objeto->ObtenerW())
+		return true;
+	if(objeto->ObtenerY() >= HEIGHT_SCREEN - objeto->ObtenerH())
+		return true;
+	return false;
 }
