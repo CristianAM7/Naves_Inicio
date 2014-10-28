@@ -19,6 +19,7 @@ public:
 
 private:
 	void Iniciando();
+	void MoverEnemigo();
 	bool EsLimitePantalla(Nave * objeto, int bandera);
 
 	Uint8 * keys;
