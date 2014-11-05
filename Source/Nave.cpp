@@ -63,3 +63,7 @@ int Nave::ObtenerPasoActual(){
 void Nave::IncrementarPasoActual(){
 	pasoActual++;
 }
+
+bool Nave::EstaColicionando(Nave * b){
+	return false;
+}

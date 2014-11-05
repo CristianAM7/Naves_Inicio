@@ -18,6 +18,7 @@ public:
 	void SetPasoLimite(int pasos);
 	int ObtenerPasoActual();
 	void IncrementarPasoActual();
+	bool EstaColicionando(Nave * b);
 	void Pintar();
 	void Actualizar();
 	int ObtenerX();
