@@ -5,6 +5,7 @@
 #include <SDL.h>
 
 CGame::CGame(){
+	tiempoFrame = 0;
 	estado=ESTADO_INICIANDO;
 	//atexit(SDL_Quit);
 }
@@ -89,6 +90,12 @@ bool CGame::Start()
 
 		//Este codigo estara provicionalmente aqui.
 		SDL_Flip(screen);
+
+		//Calculando FPS
+		int tiempoFrameFinal = SDL_GetTicks();
+		printf("%d %d %f %d \n",tick,SDL_GetTicks(), (float)SDL_GetTicks()/(float)tick, tiempoFrameFinal - tiempoFrame);
+		tiempoFrame = tiempoFrameFinal; //Marcamos el inicio nuevamente.
+		tick++;
 	}
 	return true;
 }
