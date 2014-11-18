@@ -5,7 +5,7 @@
 #include <SDL.h>
 
 CGame::CGame(){
-	tiempoFrame = 0;
+	tiempoFrameInicial = 0;
 	estado=ESTADO_INICIANDO;
 	//atexit(SDL_Quit);
 }
@@ -33,12 +33,17 @@ void CGame::Iniciando(){
 	SDL_WM_SetCaption( "Mi Primer Juego", NULL );
 	atexit(SDL_Quit);
 
-	nave = new Nave(screen,"../Data/minave.bmp",(WIDTH_SCREEN/2)/*-(sprite->WidthModule(0)/2)*/,(HEIGHT_SCREEN-80)/*-(sprite->HeightModule(0))*/);
+	nave = new Nave(screen,"../Data/minave.bmp",(WIDTH_SCREEN/2),(HEIGHT_SCREEN-80),MODULO_MINAVE_NAVE);
+	menu = new Nave(screen,"../Data/menufondo.bmp",0,0,MODULO_MENUFONDO_FONDO);
+	textos = new Nave(screen,"../Data/menutexto.bmp",0,0,MODULO_MENUTEXTO_TITULO);
+	fondo = new Nave(screen,"../Data/juegofondo.bmp",0,0,1);
 	for(int i=0;i<10;i++){
-		enemigoArreglo[i] = new Nave(screen,"../Data/enemigo.bmp",i*60,0);
+		enemigoArreglo[i] = new Nave(screen,"../Data/enemigo.bmp",i*60,0,MODULO_ENEMIGO_NAVE);
 		enemigoArreglo[i]->SetAutoMovimiento(false);
 		enemigoArreglo[i]->SetPasoLimite(4);
 	}
+	tick=0;
+	opcionSeleccionada = MODULO_MENUTEXTO_OPCION1;
 }
 
 bool CGame::Start()
@@ -54,26 +59,37 @@ bool CGame::Start()
 			estado = ESTADO_MENU;
 			break;
 		case Estado::ESTADO_MENU:
+			menu->Pintar();
+			textos->Pintar(MODULO_MENUTEXTO_TITULO,151,48);
+			textos->Pintar(MODULO_MENUTEXTO_NOMBRE,327,440);
+			Menu();
+			//estado = ESTADO_JUGANDO;
+			break;
+		case Estado::ESTADO_JUGANDO:
 			for(int i=0;i<10;i++){
 				enemigoArreglo[i]->Actualizar();
 			}
 			MoverEnemigo();
-			//enemigo->Actualizar();
-			//nave->PintarModulo(1,0,0);
 			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,0,0,0));
+			fondo->Pintar();
 			keys = SDL_GetKeyState(NULL);
 			if(keys[SDLK_RIGHT]){
 				if(!EsLimitePantalla(nave, BORDE_DERECHO))
-					nave->Mover(1);
+					nave->MoverX(10);
 			}
 			if(keys[SDLK_LEFT]){
-				nave->Mover(-1);
+				nave->MoverX(-10);
+			}
+			if(keys[SDLK_DOWN]){
+				if(!EsLimitePantalla(nave, BORDE_DERECHO))
+					nave->MoverY(10);
+			}
+			if(keys[SDLK_UP]){
+				nave->MoverY(-10);
 			}
 			nave->Pintar();
 			for(int i=0;i<10;i++)
 				enemigoArreglo[i]->Pintar();
-			break;
-		case Estado::ESTADO_JUGANDO:
 			break;
 		case Estado::ESTADO_TERMINANDO:
 			break;
@@ -92,9 +108,13 @@ bool CGame::Start()
 		SDL_Flip(screen);
 
 		//Calculando FPS
-		int tiempoFrameFinal = SDL_GetTicks();
-		printf("%d %d %f %d \n",tick,SDL_GetTicks(), (float)SDL_GetTicks()/(float)tick, tiempoFrameFinal - tiempoFrame);
-		tiempoFrame = tiempoFrameFinal; //Marcamos el inicio nuevamente.
+		tiempoFrameFinal = SDL_GetTicks();
+		while(tiempoFrameFinal < (tiempoFrameInicial + FPS_DELAY)){
+			tiempoFrameFinal=SDL_GetTicks();
+			SDL_Delay(1);
+		}
+		printf("Frames:%d Tiempo:%d Tiempo Promedio:%f Tiempo por Frame:%d FPS:%f\n",tick,SDL_GetTicks(), (float)SDL_GetTicks()/(float)tick, tiempoFrameFinal - tiempoFrameInicial, 1000.0f / (float)(tiempoFrameFinal - tiempoFrameInicial));
+		tiempoFrameInicial = tiempoFrameFinal; //Marcamos el inicio nuevamente.
 		tick++;
 	}
 	return true;
@@ -120,7 +140,7 @@ void CGame::MoverEnemigo(){
 		///PASO 0///
 		if(enemigoArreglo[i]->ObtenerPasoActual()==0)
 			if (!EsLimitePantalla(enemigoArreglo[i],BORDE_DERECHO))
-				enemigoArreglo[i]->Mover(1);//Derecha
+				enemigoArreglo[i]->MoverX(10);//Derecha
 			else{
 				enemigoArreglo[i]->IncrementarPasoActual();
 				enemigoArreglo[i]->IncrementarPasoActual();
@@ -132,7 +152,7 @@ void CGame::MoverEnemigo(){
 			///PASO 2///
 		if(enemigoArreglo[i]->ObtenerPasoActual()==2)
 			if (!EsLimitePantalla(enemigoArreglo[i],BORDE_IZQUIERDO))
-				enemigoArreglo[i]->Mover(-1);//Izquierda
+				enemigoArreglo[i]->MoverX(-10);//Izquierda
 			else{
 				enemigoArreglo[i]->IncrementarPasoActual();
 				enemigoArreglo[i]->IncrementarPasoActual();
@@ -141,5 +161,14 @@ void CGame::MoverEnemigo(){
 		//if(enemigoArreglo[i]->ObtenerPasoActual()==3)
 		//	if (!EsLimitePantalla(enemigoArreglo[i],BORDE_INFERIOR))
 		//		enemigoArreglo[i]->Mover(1);//Abajo
+	}
+}
+
+void CGame::Menu(){
+	for (int i = MODULO_MENUTEXTO_OPCION1, j = 0; i <= MODULO_MENUTEXTO_OPCION2; i++, j++){
+		if(i == opcionSeleccionada)
+			textos->Pintar(i+2,260,160+(j*40));
+		else
+			textos->Pintar(i,260,162+(j*40));
 	}
 }
