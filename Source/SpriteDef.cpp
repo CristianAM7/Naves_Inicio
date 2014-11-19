@@ -51,7 +51,7 @@ SpriteDef::SpriteDef(){
 	modulos[7].h = 33;
 
 	modulos[8].id = MODULO_MENUTEXTO_OPCION2SELECCIONADO;
-	modulos[8].x = 388;
+	modulos[8].x = 390;
 	modulos[8].y = 202;
 	modulos[8].w = 97;
 	modulos[8].h = 32;

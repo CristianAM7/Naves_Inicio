@@ -70,7 +70,7 @@ bool CGame::Start()
 				enemigoArreglo[i]->Actualizar();
 			}
 			MoverEnemigo();
-			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,0,0,0));
+			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format,255,0,255));
 			fondo->Pintar();
 			keys = SDL_GetKeyState(NULL);
 			if(keys[SDLK_RIGHT]){
@@ -167,7 +167,7 @@ void CGame::MoverEnemigo(){
 void CGame::Menu(){
 	for (int i = MODULO_MENUTEXTO_OPCION1, j = 0; i <= MODULO_MENUTEXTO_OPCION2; i++, j++){
 		if(i == opcionSeleccionada)
-			textos->Pintar(i+2,260,160+(j*40));
+			textos->Pintar(i+2,260,162+(j*40));
 		else
 			textos->Pintar(i,260,162+(j*40));
 	}

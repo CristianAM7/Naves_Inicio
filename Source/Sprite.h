@@ -6,6 +6,7 @@
 class Sprite{
 	SDL_Surface * imagen;//Imagen
 	SDL_Surface * screen;//Pantalla
+
 	SpriteDef spriteDef;
 public:
 	Sprite(SDL_Surface * screen);//Constructor
