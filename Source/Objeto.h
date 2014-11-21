@@ -1,8 +1,8 @@
-#ifndef __NAVE_H__
-#define __NAVE_H__
+#ifndef __OBJETO_H__
+#define __OBJETO_H__
 #include "Sprite.h"
 
-class Nave{
+class Objeto{
 	Sprite * sprite;
 	int x;
 	int y;
@@ -15,7 +15,7 @@ class Nave{
 public:
 	void MoverX(int posicion);
 	void MoverY(int posicion);
-	Nave(SDL_Surface * screen, char * rutaImagen, int x, int y, int module);//Constructor
+	Objeto(SDL_Surface * screen, char * rutaImagen, int x, int y, int module);//Constructor
 	int Titulo(SDL_Surface * screen, char * rutaImagen);
 	int Menu(SDL_Surface * screen, char * rutaImagen);
 	int Juego(SDL_Surface * screen, char * rutaImagen);
@@ -23,7 +23,7 @@ public:
 	void SetPasoLimite(int pasos);
 	int ObtenerPasoActual();
 	void IncrementarPasoActual();
-	bool EstaColicionando(Nave * b);
+	bool EstaColicionando(Objeto * b);
 	void Pintar();
 	void Pintar(int module, int x, int y);
 	void Actualizar();
