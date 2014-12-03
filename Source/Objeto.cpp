@@ -12,6 +12,7 @@ Objeto::Objeto(SDL_Surface * screen, char * rutaImagen, int x, int y, int module
 	autoMovimiento = false;
 	pasoActual = 0;
 	pasoLimite = -1;
+	isVisible = true;
 }
 
 void Objeto::SetAutoMovimiento(bool autoMovimiento){
@@ -30,11 +31,17 @@ void Objeto::Actualizar(){
 }
 
 void Objeto::Pintar(){
+	if(isVisible)
 	sprite->PintarModulo(module,x,y);
 }
 
 void Objeto::Pintar(int module, int x, int y){
+	if(isVisible)
 	sprite->PintarModulo(module,x,y);
+}
+
+void Objeto::SetVisible(bool isVisible){
+	this->isVisible = isVisible;
 }
 
 void Objeto::MoverX(int posicion){
@@ -75,4 +82,9 @@ void Objeto::IncrementarPasoActual(){
 
 bool Objeto::EstaColicionando(Objeto * b){
 	return false;
+}
+
+void Objeto::PonerEn(int x, int y){
+	this->x=x;
+	this->y=y;
 }

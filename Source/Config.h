@@ -12,8 +12,6 @@
 #define FPS_LIMIT    30.0f
 #define FPS_DELAY    1000.0f / FPS_LIMIT
 
-#define SPRITE_MODULE_MI_NAVE 0
-
 //SPRITES//
 //#TIPO_IMAGEN_NOMBRE
 #define MODULO_MINAVE_NAVE						0
@@ -25,5 +23,11 @@
 #define MODULO_MENUTEXTO_OPCION2				6
 #define MODULO_MENUTEXTO_OPCION1SELECCIONADO    7
 #define MODULO_MENUTEXTO_OPCION2SELECCIONADO    8
+#define MODULO_BALAS_BALA                       9
+
+#define MAXIMO_DE_BALAS    30
+
+#define NAVE_PROPIA     0
+#define NAVE_ENEMIGO    1
 
 #endif

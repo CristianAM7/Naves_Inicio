@@ -1,5 +1,6 @@
 #pragma once;
 #include "Objeto.h"
+#include "Nave.h"
 
 class CGame
 {
@@ -30,8 +31,8 @@ private:
 	SDL_Surface * screen;
 	SDL_Surface * imagen;
 
-	Objeto * nave;
-	Objeto * enemigoArreglo [10];
+	Nave * nave;
+	Nave * enemigoArreglo [10];
 
 	Objeto * menu;//Fondo del Menu
 	Objeto * textos;//Textos del Menu

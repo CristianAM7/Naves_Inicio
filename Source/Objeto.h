@@ -12,7 +12,9 @@ class Objeto{
 	int pasoActual;
 	int pasoLimite;
 	int module;//Modulo Actual.
+	bool isVisible;
 public:
+	void SetVisible(bool isVisible);
 	void MoverX(int posicion);
 	void MoverY(int posicion);
 	Objeto(SDL_Surface * screen, char * rutaImagen, int x, int y, int module);//Constructor
@@ -31,6 +33,7 @@ public:
 	int ObtenerY();
 	int ObtenerW();
 	int ObtenerH();
+	void PonerEn(int x, int y);
 };
 
 #endif
