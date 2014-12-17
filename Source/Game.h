@@ -1,6 +1,7 @@
 #pragma once;
 #include "Objeto.h"
 #include "Nave.h"
+#include "Stage.h"
 
 class CGame
 {
@@ -11,6 +12,7 @@ public:
 	enum Estado{
 		ESTADO_INICIANDO,
 		ESTADO_MENU,
+		ESTADO_PRE_JUGANDO,
 		ESTADO_JUGANDO,
 		ESTADO_TERMINANDO,
 		ESTADO_FINALIZANDO
@@ -33,6 +35,9 @@ private:
 
 	Nave * nave;
 	Nave * enemigoArreglo [10];
+	Stage nivel[4];
+	void InicializandoStage();
+	int nivelActual;
 
 	Objeto * menu;//Fondo del Menu
 	Objeto * textos;//Textos del Menu
@@ -43,4 +48,7 @@ private:
 	int tiempoFrameFinal;
 
 	Estado estado; 
+
+	int vida;
+	int enemigosEliminados;
 };
